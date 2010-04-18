@@ -21,6 +21,7 @@ static DListRet max_cb(void* ctx, void* data)
 	MaxCtx* max_ctx = ctx;
 	if(max_ctx->is_first)
 	{
+		max_ctx->is_first = 0;
 		max_ctx->max = (int)data;
 	}
 	else if(max_ctx->max < (int)data)
