@@ -121,8 +121,6 @@ DListRet dlist_insert(DList* thiz, size_t index, void* data)
 	
 	if(index < dlist_length(thiz))
 	{
-		node->next = cursor;
-		cursor->prev = node;
 		if(thiz->first == cursor)
 		{
 			thiz->first = node;
@@ -132,6 +130,8 @@ DListRet dlist_insert(DList* thiz, size_t index, void* data)
 			cursor->prev->next = node;
 			node->prev = cursor->prev;
 		}
+		node->next = cursor;
+		cursor->prev = node;
 	}
 	else
 	{
