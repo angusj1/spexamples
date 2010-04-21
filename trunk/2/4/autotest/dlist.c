@@ -143,12 +143,17 @@ DListRet dlist_insert(DList* thiz, size_t index, void* data)
 	
 	if(index < dlist_length(thiz))
 	{
-		node->next = cursor;
-		cursor->prev = node;
 		if(thiz->first == cursor)
 		{
 			thiz->first = node;
 		}
+		else
+		{
+			cursor->prev->next = node;
+			node->prev = cursor->prev;
+		}
+		node->next = cursor;
+		cursor->prev = node;
 	}
 	else
 	{
@@ -333,6 +338,7 @@ static DListRet check_and_dec_int(void* ctx, void* data)
 
 void test_int_dlist(void)
 {
+	int s = 0;
 	int i = 0;
 	int n = 100;
 	int data = 0;
@@ -381,6 +387,19 @@ void test_int_dlist(void)
 
 	i = n - 1;
 	assert(dlist_foreach(dlist, check_and_dec_int, &i) == DLIST_RET_OK);
+	
+	s = dlist_length(dlist);
+	for(i = 1; i < n; i++)
+	{
+		assert(dlist_insert(dlist, i, (void*)i) == DLIST_RET_OK);
+		assert(dlist_length(dlist) == (s + i));
+		assert(dlist_get_by_index(dlist, i, (void**)&data) == DLIST_RET_OK);
+		assert(data == i);
+		assert(dlist_set_by_index(dlist, i, (void*)(2*i)) == DLIST_RET_OK);
+		assert(dlist_get_by_index(dlist, i, (void**)&data) == DLIST_RET_OK);
+		assert(data == 2*i);
+		assert(dlist_set_by_index(dlist, i, (void*)i) == DLIST_RET_OK);
+	}
 
 	dlist_destroy(dlist);
 
