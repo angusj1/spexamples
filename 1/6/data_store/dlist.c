@@ -142,6 +142,11 @@ DListRet dlist_insert(DList* thiz, size_t index, void* data)
 		{
 			thiz->first = node;
 		}
+		else
+		{
+			cursor->prev->next = node;
+			node->prev = cursor->prev;
+		}
 	}
 	else
 	{
