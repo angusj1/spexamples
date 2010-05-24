@@ -103,7 +103,7 @@ Ret rw_locker_unlock(RwLocker* thiz)
 
 	if(thiz->mode == RW_LOCKER_WR)
 	{
-		thiz->mode == RW_LOCKER_NONE;
+		thiz->mode = RW_LOCKER_NONE;
 		ret = locker_unlock(thiz->rw_locker);
 	}
 	else
@@ -114,7 +114,7 @@ Ret rw_locker_unlock(RwLocker* thiz)
 			thiz->readers--;
 			if(thiz->readers == 0)
 			{
-				thiz->mode == RW_LOCKER_NONE;
+				thiz->mode = RW_LOCKER_NONE;
 				ret = locker_unlock(thiz->rw_locker);
 			}
 			locker_unlock(thiz->rd_locker);
