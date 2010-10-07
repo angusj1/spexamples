@@ -6,9 +6,11 @@ AC_INIT(base, 0.1, xianjimli@hotmail.com)
 AC_CONFIG_SRCDIR([src/invert.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE(base, 0.1)
+AC_CONFIG_MACRO_DIR([m4]) 
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_LIBTOOL
+AM_PROG_CC_C_O
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lpthread':
