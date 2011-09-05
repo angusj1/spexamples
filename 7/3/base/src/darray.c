@@ -216,7 +216,7 @@ int      darray_find(DArray* thiz, DataCompareFunc cmp, void* ctx)
 		}
 	}
 
-	return i;
+	return i >= thiz->size ? -1 : i;
 }
 
 void darray_destroy(DArray* thiz)
