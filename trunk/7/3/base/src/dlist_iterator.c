@@ -59,7 +59,7 @@ static Ret  dlist_iterator_prev(Iterator* thiz)
 		ret = RET_OK;
 	}
 
-	return RET_OK;
+	return ret;
 }
 
 static Ret  dlist_iterator_advance(Iterator* thiz, int offset)
